@@ -1,0 +1,328 @@
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-card h3 {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: var(--bg-hover);
+}
+
+.stat-card .value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.data-source-notice {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 5px 20px;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+}
+
+.stock-table-container {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stock-table th,
+.stock-table td {
+    padding: 16px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.stock-table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.stock-table tr:hover {
+    background-color: var(--bg-hover);
+}
+
+.stock-ticker {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.stock-name {
+    font-size: 12px;
+    color: var(--text-main);
+    margin-left: 8px;
+}
+
+.btn-trade {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.btn-trade:hover {
+    filter: brightness(110%);
+}
+
+.btn-buy {
+    background-color: var(--accent);
+    /* Green */
+    color: white;
+}
+
+.btn-sell {
+    background-color: var(--danger);
+    /* Red */
+    color: white;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    width: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.form-input {
+    width: 100%;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-cancel {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.btn-confirm {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-theme-opt {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border);
+    background-color: var(--bg-card);
+    color: var(--text-muted);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.btn-theme-opt:hover {
+    background-color: var(--bg-hover);
+}
+
+.btn-theme-opt.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.btn-timeframe {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+    min-width: 40px;
+}
+
+.btn-timeframe:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+
+.btn-timeframe.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.chart-legend {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 20;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-main);
+    background: var(--bg-card);
+    /* Optional: semi-transparent bg if needed */
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    /* Let clicks pass through to chart */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Dashboard Overrides */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        /* Single Column */
+        gap: 16px;
+    }
+
+    /* Force Table Scroll */
+    .stock-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .stock-table {
+        min-width: 600px;
+        /* Ensure table prompts scroll */
+    }
+
+    /* Adjust Modal Sizing */
+    .modal {
+        width: 90%;
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+/* Fullscreen Chart Overlay */
+.chart-fullscreen-overlay {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    background: var(--bg-card);
+    border-radius: 0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-fullscreen-overlay #tv-chart-container {
+    height: 100% !important;
+    /* Force chart to fill the overlay */
+    flex: 1;
+}
+
+.chart-fullscreen-btn-close {
+    display: none;
+    /* Hidden by default, shown by JS */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    background: var(--danger);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.chart-fullscreen-overlay .chart-legend {
+    top: 80px;
+    /* Push legend down below close button on mobile if needed */
+}
