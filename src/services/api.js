@@ -96,9 +96,39 @@ export const fetchRealStockPrice = async (tickerId) => {
     }
 };
 
+const generateMockHistory = (interval = '1d', range = '1y') => {
+    const candles = [];
+    const volume = [];
+    let time = Math.floor(Date.now() / 1000) - (range === '1d' ? 86400 : 31536000); // Start point
+    let price = 1000 + Math.random() * 500;
+    const points = range === '1d' ? 390 : 250; // Approx points
+    const step = range === '1d' ? 60 : 86400; // Step in seconds (1m or 1d)
+
+    for (let i = 0; i < points; i++) {
+        time += step;
+        const change = (Math.random() - 0.5) * (price * 0.02);
+        const close = price + change;
+        const open = price;
+        const high = Math.max(open, close) + Math.random() * (price * 0.01);
+        const low = Math.min(open, close) - Math.random() * (price * 0.01);
+
+        candles.push({ time, open, high, low, close });
+
+        volume.push({
+            time,
+            value: Math.floor(Math.random() * 100000),
+            color: close >= open ? 'rgba(38, 166, 154, 0.5)' : 'rgba(239, 83, 80, 0.5)'
+        });
+
+        price = close;
+    }
+    return { candles, volume };
+};
+
 export const fetchStockHistory = async (stockId, interval = '1d', range = '1y') => {
     const symbol = TICKER_MAP[stockId];
-    if (!symbol) return null;
+    if (!symbol) return generateMockHistory(interval, range); // Fallback if no symbol
+
     try {
         let response;
         if (LOCAL_PROXY) {
@@ -108,9 +138,12 @@ export const fetchStockHistory = async (stockId, interval = '1d', range = '1y') 
             const url = `${CORS_PROXY}${encodeURIComponent(YAHOO_API_BASE + symbol + '?interval=' + interval + '&range=' + range)}`;
             response = await fetch(url);
         }
+
+        if (!response.ok) throw new Error('Network error');
+
         const data = await response.json();
         const result = data.chart.result[0];
-        if (!result || !result.timestamp) return null;
+        if (!result || !result.timestamp) throw new Error('No data');
 
         const quotes = result.indicators.quote[0];
         const timestamps = result.timestamp;
@@ -155,8 +188,8 @@ export const fetchStockHistory = async (stockId, interval = '1d', range = '1y') 
 
         return { candles: uniqueCandles, volume: uniqueVolume };
     } catch (e) {
-        console.warn('History fetch failed', e);
-        return null;
+        console.warn('History fetch failed, using mock data', e);
+        return generateMockHistory(interval, range);
     }
 };
 
